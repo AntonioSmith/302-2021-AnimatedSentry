@@ -26,7 +26,7 @@ public class PointAt : MonoBehaviour
 
     private void TurnTowardsTarget()
     {
-        if (!playerTargeting || !playerTargeting.target && playerTargeting.wantsToTarget)
+        if (playerTargeting && playerTargeting.target && playerTargeting.wantsToTarget)
         {
             Vector3 disToTarget = playerTargeting.target.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(disToTarget, Vector3.up);

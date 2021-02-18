@@ -39,7 +39,12 @@ public static class AnimMath
         //rot.w = Lerp(min.w, max.w, p, allowExtrapolation);
 
         //Quaternion.Lerp(min, max, p);
-        return Quaternion.Lerp(min, max, p); ;
+        if (!allowExtrapolation)
+        {
+            if (p < 0) p = 0;
+            if (p > 1) p = 1;
+        }
+        return Quaternion.Lerp(min, max, p);
     }
 
     public static float Slide(float current, float target, float percentLeftAfter1Second) // 1 dimensional slide

@@ -34,6 +34,8 @@ public class PlayerTargeting : MonoBehaviour
     {
         cooldownScan = 1; // restarts scan at 2 seconds
 
+        potentialTargets.Clear(); // empites list
+
         TargetableThing[] things = GameObject.FindObjectsOfType<TargetableThing>();
 
         foreach(TargetableThing thing in things)
@@ -56,6 +58,8 @@ public class PlayerTargeting : MonoBehaviour
 
     void PickATarget()
     {
+        cooldownPick = .25f; 
+
         if (target) return; // if you already have a target
 
         float closestDistanceSoFar = 0;
