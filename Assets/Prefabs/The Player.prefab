@@ -957,6 +957,7 @@ MonoBehaviour:
   target: {fileID: 0}
   wantsToTarget: 0
   visionDistance: 10
+  visionAngle: 45
 --- !u!114 &8778510607512006499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,6 +971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+  leg1: {fileID: 5253022712043769062}
+  leg2: {fileID: 4060853765342866858}
 --- !u!1 &4822092188225464229
 GameObject:
   m_ObjectHideFlags: 0

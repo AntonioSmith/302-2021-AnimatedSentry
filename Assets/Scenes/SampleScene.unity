@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 1834654843}
   - component: {fileID: 1834654842}
   m_Layer: 0
-  m_Name: Camerarig
+  m_Name: Camera Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,9 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6ad59a6a8f3d04790e32c0b29f5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4822092188274721818}
-  cameraSensitivityX: 10
-  cameraSensitivityY: 10
+  moveScript: {fileID: 4822092188274721818}
+  cameraSensitivityX: 5
+  cameraSensitivityY: -5
 --- !u!4 &1834654843
 Transform:
   m_ObjectHideFlags: 0

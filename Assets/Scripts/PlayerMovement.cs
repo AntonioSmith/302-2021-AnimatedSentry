@@ -8,6 +8,15 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController pawn;
     public float walkSpeed = 5;
 
+    public Transform leg1;
+    public Transform leg2;
+
+    private Vector3 inputDirection = new Vector3();
+    /// <summary>
+    /// How fast the player is currently moving vertically (y-axis), in meters/second
+    /// </summary>
+    private float verticalVelocity;
+
     void Start()
     {
         cam = Camera.main;
@@ -15,6 +24,38 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
+    {
+        MovePlayer();
+        WiggleLegs();
+    }
+
+    private void WiggleLegs()
+    {
+        float degrees = 45;
+        float speed = 10;
+
+        Vector3 inputDirLocal = transform.InverseTransformDirection(inputDirection);
+        Vector3 axis = Vector3.Cross(inputDirLocal, Vector3.up);
+
+        // check the alignment of inputDirLocal against forward vector
+        float alignment = Vector3.Dot(inputDirLocal, Vector3.forward);
+
+        //if (alignment < 0) alignment *= -1; // flips negative numbers
+              // ^^^ Both do same thing, choose one vvv // 
+        alignment = Mathf.Abs(alignment); // flips negative numbers
+
+        degrees *= AnimMath.Lerp(.25f, 1, alignment); // decrease "degrees" variable when strafing
+
+        float wave = Mathf.Sin(Time.time * speed) * degrees;
+
+        leg1.localRotation = AnimMath.Slide(leg1.localRotation, Quaternion.AngleAxis(wave, axis), .001f);
+        leg2.localRotation = AnimMath.Slide(leg2.localRotation, Quaternion.AngleAxis(-wave, axis), .001f);
+
+        //leg1.localRotation = Quaternion.Euler(wave, 0, 0); //This code is now updated to allow leg rotation when turning ^^^
+        //leg2.localRotation = Quaternion.Euler(-wave, 0, 0);
+    }
+
+    private void MovePlayer()
     {
         float h = Input.GetAxis("Horizontal"); // strafing
         float v = Input.GetAxis("Vertical"); // forward / backward
@@ -27,8 +68,23 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = AnimMath.Slide(transform.rotation, Quaternion.Euler(0, camYaw, 0), .02f);
         }
 
-        Vector3 inputDirection = transform.forward * v + transform.right * h;
+        inputDirection = transform.forward * v + transform.right * h;
 
-        pawn.SimpleMove(inputDirection * walkSpeed);
+        if (inputDirection.sqrMagnitude > 1) inputDirection.Normalize();
+
+        //applies gravity
+        verticalVelocity += 10 * Time.deltaTime;
+        // adds ;ateral movement to vertical movement
+        Vector3 moveDelta = inputDirection * walkSpeed + verticalVelocity * Vector3.down;
+        // move player
+        CollisionFlags flags = pawn.Move(moveDelta * Time.deltaTime);
+
+        // 0000 1100 (8-bit number)
+        if (pawn.isGrounded)
+        {
+            verticalVelocity = 0; // on ground, zero-out vertical velocity
+        }
+
+
     }
 }
