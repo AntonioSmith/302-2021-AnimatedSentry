@@ -6,23 +6,51 @@ using UnityEngine;
 public class PlayerTargeting : MonoBehaviour 
 {
     public Transform target;
+
     public bool wantsToTarget = false;
+    public bool wantsToAttack = false;
 
     float cooldownScan = 0;
     float cooldownPick = 0;
+    float cooldownShoot = 0;
+
     public float visionDistance = 10;
     public float visionAngle = 45; // cone of vision
+    public float roundsPerSecond = 10;
+
+    // References player's arm bones
+    public Transform armL;
+    public Transform armR;
+    public Transform handR;
+    public Transform handL;
+
+    CameraOrbit camOrbit;
+
+    private Vector3 startPosArmL;
+    private Vector3 startPosArmR;
+
+    /// <summary>
+    /// A reference ot the particle system prefab to spawn when the gun shoots
+    /// </summary>
+    public ParticleSystem prefabMuzzleFlash;
+
 
     private List<TargetableThing> potentialTargets = new List<TargetableThing>();
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; // locks mouse to game screen
+
+        startPosArmL = armL.localPosition;
+        startPosArmR = armR.localPosition;
+
+        camOrbit = Camera.main.GetComponentInParent<CameraOrbit>();
     }
 
     void Update()
     {
         wantsToTarget = Input.GetButton("Fire2");
+        wantsToAttack = Input.GetButton("Fire1");
 
         if (!wantsToTarget) target = null;
 
@@ -32,10 +60,57 @@ public class PlayerTargeting : MonoBehaviour
         cooldownPick -= Time.deltaTime;
         if (cooldownPick <= 0) PickATarget();
 
+        if (cooldownShoot > 0)
+        {
+            cooldownShoot -= Time.deltaTime;
+        }
+
         if (target && !CanSeeThing(target))
         {
             target = null;
         }
+
+        SlideArmsHome();
+
+        DoAttack();
+    }
+
+    private void SlideArmsHome()
+    {
+        armL.localPosition = AnimMath.Slide(armL.localPosition, startPosArmL, .01f);
+        armR.localPosition = AnimMath.Slide(armR.localPosition, startPosArmR, .01f);
+    }
+
+    private void DoAttack()
+    {
+        // Check if player should attack
+        if (cooldownShoot > 0) return; // still on cooldown
+        if (!wantsToTarget) return; // not targeting
+        if (!wantsToAttack) return; // not shooting
+        if (target == null) return; // no target
+        if (!CanSeeThing(target)) return; // no target in range
+
+        HealthSystem targetHealth = target.GetComponent<HealthSystem>();
+
+        if (targetHealth)
+        {
+            targetHealth.TakeDamage(20);
+        }
+
+        cooldownShoot = 1 / roundsPerSecond;
+
+        // Attack
+        if (handL) Instantiate(prefabMuzzleFlash, handL.position, handL.rotation);
+        if (handR) Instantiate(prefabMuzzleFlash, handR.position, handR.rotation);
+
+        // Trigger arm animation
+        armL.localEulerAngles += new Vector3(-20, 0, 0); // LArm recoil on shoot
+        armR.localEulerAngles += new Vector3(-20, 0, 0); // RArm recoil on shoot
+
+        armL.position += -armL.forward * .1f; // LArm pushback on shoot 
+        armR.position += -armR.forward * .1f; // RArm pushback on shoot 
+
+        camOrbit.Shake(.5f); // Shakes camera with an intensity of 1
     }
 
     private bool CanSeeThing(Transform thing)
