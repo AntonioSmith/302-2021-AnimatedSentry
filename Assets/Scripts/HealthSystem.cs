@@ -22,6 +22,7 @@ public class HealthSystem : MonoBehaviour
 
     public void Die()
     {
+        Soundboard.PlaySentryDeath();
         Destroy(gameObject);
     }
 }

@@ -16,7 +16,7 @@ public class PlayerTargeting : MonoBehaviour
 
     public float visionDistance = 10;
     public float visionAngle = 45; // cone of vision
-    public float roundsPerSecond = 10;
+    public float roundsPerSecond = 3;
 
     // References player's arm bones
     public Transform armL;
@@ -120,6 +120,7 @@ public class PlayerTargeting : MonoBehaviour
         armR.position += -armR.forward * .1f; // RArm pushback on shoot 
 
         camOrbit.Shake(.5f); // Shakes camera with an intensity of 1
+        Soundboard.PlayShoot();
     }
 
     private bool CanSeeThing(Transform thing)

@@ -13,10 +13,6 @@ public class Projectile : MonoBehaviour
 
     public float bulletLifetime = 3; // Time before bullet automatically destroys self
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         //velocity = transform.TransformDirection(Vector3.forward * 10);
@@ -41,16 +37,17 @@ public class Projectile : MonoBehaviour
         HealthSystem playerHealth = player.GetComponent<HealthSystem>();
         //HealthSystem enemyHealth = enemy.GetComponent<HealthSystem>();
 
-        // if overlapping a player object
-        if (player)
-        {
-            // if player has health
-            if (playerHealth)
-            {
-                playerHealth.TakeDamage(10);
-            }
-            Destroy(gameObject); // remove projectile after overlap
-        } else if (enemy)
+        //// if overlapping a player object
+        //if (player)
+        //{
+        //    // if player has health
+        //    if (playerHealth)
+        //    {
+        //        playerHealth.TakeDamage(10);
+        //    }
+        //    Destroy(gameObject); // remove projectile after overlap
+        //} 
+        if (enemy)
         {
             Destroy(gameObject);
         }

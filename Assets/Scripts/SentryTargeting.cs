@@ -18,8 +18,8 @@ public class SentryTargeting : MonoBehaviour
     void Update()
     {
         TurnTowardsPlayer();
-        print("position: " + target);
-        print("rotation: " + transform.rotation);
+        //print("position: " + target);
+        //print("rotation: " + transform.rotation);
     }
 
     public void TurnTowardsPlayer()

@@ -7,11 +7,10 @@ public class Sentry : MonoBehaviour
     public Transform player;
     public Transform barrel;
 
-    public GameObject bullet;
+    public GameObject laser;
 
     public float cooldownShoot = 0;
-    float cooldownPick = 0;
-    public float roundsPerSecond = 10;
+    public float roundsPerSecond = 6;
 
     public ParticleSystem prefabMuzzleFlash;
 
@@ -22,15 +21,23 @@ public class Sentry : MonoBehaviour
 
     void Update()
     {
-        
+        if (cooldownShoot > 0)
+        {
+            cooldownShoot -= Time.deltaTime;
+        }
+
+        ShootPlayer();
     }
 
     private void ShootPlayer()
     {
+        if (cooldownShoot > 0) return; // still on cooldown
+
         cooldownShoot = 1 / roundsPerSecond;
 
         Instantiate(prefabMuzzleFlash, barrel.position, barrel.rotation);
-        Instantiate(bullet, barrel.transform.position,barrel.transform.rotation);
+        Instantiate(laser, barrel.transform.position, barrel.transform.rotation);
+        Soundboard.PlayLaser();
     }
 
     void LookAtPlayer()
