@@ -997,6 +997,7 @@ MonoBehaviour:
   armR: {fileID: 2366552389929568115}
   handR: {fileID: 9060193701214755637}
   handL: {fileID: 4823902864147706684}
+  bullet: {fileID: 9122095428732464356, guid: d3c3fea47516bce48ae4e244acfebd01, type: 3}
   prefabMuzzleFlash: {fileID: 6532570285264450471, guid: fbf5850ce39f5694cbec0f72a190e64a, type: 3}
 --- !u!114 &8778510607512006499
 MonoBehaviour:

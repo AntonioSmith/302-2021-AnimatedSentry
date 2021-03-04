@@ -24,6 +24,8 @@ public class PlayerTargeting : MonoBehaviour
     public Transform handR;
     public Transform handL;
 
+    public GameObject bullet;
+
     CameraOrbit camOrbit;
 
     private Vector3 startPosArmL;
@@ -94,14 +96,21 @@ public class PlayerTargeting : MonoBehaviour
 
         if (targetHealth)
         {
-            targetHealth.TakeDamage(20);
+            targetHealth.TakeDamage(20); // Deal damage to target's health
         }
 
-        cooldownShoot = 1 / roundsPerSecond;
+        cooldownShoot = 1 / roundsPerSecond; 
 
         // Attack
         if (handL) Instantiate(prefabMuzzleFlash, handL.position, handL.rotation);
         if (handR) Instantiate(prefabMuzzleFlash, handR.position, handR.rotation);
+
+        // Instantiate bullet on hands
+        //Instantiate(bullet, handL.transform.position, Quaternion.identity);
+        //Instantiate(bullet, handR.transform.position, Quaternion.identity);
+
+        Instantiate(bullet, handL.transform.position, handL.transform.rotation);
+        Instantiate(bullet, handR.transform.position, handR.transform.rotation);
 
         // Trigger arm animation
         armL.localEulerAngles += new Vector3(-20, 0, 0); // LArm recoil on shoot
@@ -174,8 +183,8 @@ public class PlayerTargeting : MonoBehaviour
         {
             float dd = (pt.transform.position - transform.position).sqrMagnitude;
 
-            if (dd < closestDistanceSoFar || target == null) 
-            {
+
+            if (dd < closestDistanceSoFar || target == null)             {
                 target = pt.transform;
                 closestDistanceSoFar = dd;
             }
