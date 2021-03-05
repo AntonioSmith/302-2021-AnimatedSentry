@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782372735771571659}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.75, y: -0.008000016, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.03, y: -0.008000016, z: 0.75}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6492185461648400278}
   m_Father: {fileID: 8340182856279007625}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!33 &2451857974687119728
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -221,8 +221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthMax: 100
-  enemy: {fileID: 2622318176816133899}
-  player: {fileID: 4822092188037827386, guid: 0c2384c0fa979e24d8c69c7f05326a24, type: 3}
 --- !u!114 &8423894249839742755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,9 +349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4822092188037827388, guid: 0c2384c0fa979e24d8c69c7f05326a24, type: 3}
-  lockRotationX: 0
-  lockRotationY: 0
-  lockRotationZ: 0
 --- !u!1 &9150442616912559608
 GameObject:
   m_ObjectHideFlags: 0

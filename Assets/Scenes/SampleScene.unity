@@ -358,6 +358,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528122078111997431, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1162814842}
     - target: {fileID: 2622318176816133899, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
       propertyPath: m_Name
       value: Enemy_Cannon (1)
@@ -1369,6 +1373,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628c3fc835262c447b9fc220810637fa, type: 3}
+--- !u!4 &1162814842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4822092188037827388, guid: 0c2384c0fa979e24d8c69c7f05326a24, type: 3}
+  m_PrefabInstance: {fileID: 4822092188274721816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1196084348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1433,6 +1442,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528122078111997431, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1162814842}
     - target: {fileID: 2622318176816133899, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
       propertyPath: m_Name
       value: Enemy_Cannon (2)
@@ -1661,6 +1674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528122078111997431, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1162814842}
     - target: {fileID: 2622318176816133899, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
       propertyPath: m_Name
       value: Enemy_Cannon (3)
@@ -1775,6 +1792,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528122078111997431, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1162814842}
     - target: {fileID: 2622318176816133899, guid: b4c7d33907e4d654fa976d0ff9f22e6e, type: 3}
       propertyPath: m_Name
       value: Enemy_Cannon
